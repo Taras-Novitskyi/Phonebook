@@ -1,8 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+
 import { Button, Box, TextField } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
+
 import { selectContacts, selectIsLoading } from 'redux/selectors';
 import { addContact } from 'redux/operation';
 import { Form } from './ContactForm.styled';
@@ -13,54 +15,60 @@ export function ContactForm({ onSubmit }) {
   const isLoading = useSelector(selectIsLoading);
 
   const handleSubmit = event => {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    const inputNumber = event.target.elements.number.value;
-    let number = inputNumber;
-    if (inputNumber.length <= 7) {
-      number =
-        inputNumber.substr(0, 3) +
-        '-' +
-        inputNumber.substr(3, 2) +
-        '-' +
-        inputNumber.substr(4, 2);
-    } else if (inputNumber.length > 7 && inputNumber.length <= 10) {
-      number =
-        inputNumber.substr(0, 3) +
-        '-' +
-        inputNumber.substr(3, 3) +
-        '-' +
-        inputNumber.substr(6, 4);
-    } else if (inputNumber.length > 10) {
-      number =
-        inputNumber.substr(0, 3) +
-        '-' +
-        inputNumber.substr(3, 3) +
-        '-' +
-        inputNumber.substr(6, 4) +
-        '-' +
-        inputNumber.substr(10, 4);
-    }
+    try {
+      event.preventDefault();
+      const name = event.target.elements.name.value;
+      const inputNumber = event.target.elements.number.value;
+      let number = inputNumber;
+      if (inputNumber.length <= 7) {
+        number =
+          inputNumber.substr(0, 3) +
+          '-' +
+          inputNumber.substr(3, 2) +
+          '-' +
+          inputNumber.substr(4, 2);
+      } else if (inputNumber.length > 7 && inputNumber.length <= 10) {
+        number =
+          inputNumber.substr(0, 3) +
+          '-' +
+          inputNumber.substr(3, 3) +
+          '-' +
+          inputNumber.substr(6, 4);
+      } else if (inputNumber.length > 10) {
+        number =
+          inputNumber.substr(0, 3) +
+          '-' +
+          inputNumber.substr(3, 3) +
+          '-' +
+          inputNumber.substr(6, 4) +
+          '-' +
+          inputNumber.substr(10, 4);
+      }
 
-    const dublicateName = contacts.find(contact => contact.name === name);
-    const dublicateNumber = contacts.find(contact => contact.phone === number);
+      const dublicateName = contacts.find(contact => contact.name === name);
+      const dublicateNumber = contacts.find(
+        contact => contact.phone === number
+      );
 
-    if (dublicateName) {
-      toast.error(`${name} is already in contacts.`);
+      if (dublicateName) {
+        toast.error(`${name} is already in contacts.`);
+        event.target.reset();
+        return;
+      }
+
+      if (dublicateNumber) {
+        toast.error(`Contact with number ${number} is already in contacts.`);
+        event.target.reset();
+        return;
+      }
+
+      onSubmit();
+      dispatch(addContact({ name, number }));
       event.target.reset();
-      return;
+      toast.success(`Contact ${name} is added in contacts.`);
+    } catch (error) {
+      toast.error(`Something wrong, try again.`);
     }
-
-    if (dublicateNumber) {
-      toast.error(`Contact with number ${number} is already in contacts.`);
-      event.target.reset();
-      return;
-    }
-
-    onSubmit();
-    dispatch(addContact({ name, number }));
-    event.target.reset();
-    toast.success(`Contact ${name} is added in contacts.`);
   };
 
   return (

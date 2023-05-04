@@ -1,9 +1,10 @@
 import { useEffect, lazy } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Box } from 'components/Box/Box';
+import { Box } from '@mui/material';
+
 import { authOperations, authSelectors } from 'redux/auth';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
@@ -25,8 +26,8 @@ export function App() {
   return isRefreshing ? (
     <b>Refreshing user...</b>
   ) : (
-    <div>
-      <Box backgroundColor="rgb(249, 249, 249)" minHeight="100vh">
+    <>
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomeView />} />
@@ -57,10 +58,11 @@ export function App() {
                 />
               }
             />
+            <Route path="*" redirectTo="/" element={<Navigate to={'/'} />} />
           </Route>
         </Routes>
         <ToastContainer />
       </Box>
-    </div>
+    </>
   );
 }

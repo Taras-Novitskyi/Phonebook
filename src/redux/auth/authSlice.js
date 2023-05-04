@@ -6,6 +6,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -37,11 +38,21 @@ const authSlice = createSlice({
     },
     [authOperations.fetchCurrentUser.rejected](state, action) {
       state.isRefreshing = false;
+      state.error = action.payload;
+    },
+    [authOperations.register.rejected](state, action) {
+      state.isRefreshing = false;
+      state.error = action.payload;
+    },
+    [authOperations.logIn.rejected](state, action) {
+      state.isRefreshing = false;
+      state.error = action.payload;
+    },
+    [authOperations.logOut.rejected](state, action) {
+      state.isRefreshing = false;
+      state.error = action.payload;
     },
   },
 });
-
-// export const { setFilter } = filterSlice.actions;
-// export const authReducer = authSlice.reducer;
 
 export default authSlice.reducer;

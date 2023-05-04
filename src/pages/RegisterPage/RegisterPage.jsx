@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { Button, InputLabel, Input } from '@mui/material';
+
 import { authOperations } from '../../redux/auth';
 import { Form } from './RegisterPage.styled';
 
@@ -24,11 +26,15 @@ export function RegisterPage() {
   };
 
   const handleSubmit = e => {
-    e.preventDefault();
-    dispatch(authOperations.register({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');
+    try {
+      e.preventDefault();
+      dispatch(authOperations.register({ name, email, password }));
+      setName('');
+      setEmail('');
+      setPassword('');
+    } catch (error) {
+      toast.error(`Something wrong, try again. Error ${error.message}`);
+    }
   };
 
   return (
@@ -67,6 +73,6 @@ export function RegisterPage() {
       </Form>
     </div>
   );
-};
+}
 
 export default RegisterPage;

@@ -1,12 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { IconButton, Box } from '@mui/material';
 import { BiLogIn } from 'react-icons/bi';
+import { toast } from 'react-toastify';
+
 import { authSelectors, authOperations } from '../../redux/auth';
 
 export  function UserMenu() {
   const dispatch = useDispatch();
   const name = useSelector(authSelectors.selectUserName);
 
+  const logOut = () => {
+    try {
+      dispatch(authOperations.logOut())
+    } catch (error) {
+      toast.error(`Something wrong, try again.`);
+    }
+  }
+ 
   return (
     <Box 
       sx={{
@@ -26,7 +36,7 @@ export  function UserMenu() {
       <IconButton
         type="button"
         aria-label="Logout"
-        onClick={() => dispatch(authOperations.logOut())}
+        onClick={logOut}
       >
         <BiLogIn />
       </IconButton>

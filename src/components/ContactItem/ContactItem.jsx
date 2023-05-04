@@ -1,18 +1,23 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+
 import { IconButton, Box, Link, Container } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
+
 import { deleteContact } from 'redux/operation';
 
 export const ContactItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
 
   const handleDelete = id => {
-    toast.success(`Contact ${name} has been removed from the contacts.`);
-    return dispatch(deleteContact(id));
+    try {
+      dispatch(deleteContact(id));
+      toast.success(`Contact ${name} has been removed from the contacts.`);
+    } catch (error) {}
+    toast.error(`Something wrong, try again.`);
   };
 
   const LinkTo = `tel:${number}`;
@@ -29,7 +34,6 @@ export const ContactItem = ({ id, name, number }) => {
         <Box
           sx={{
             display: 'flex',
-            // justifyContent: 'start',
             alignItems: 'center',
           }}
         >
