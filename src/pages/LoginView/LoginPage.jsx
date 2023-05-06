@@ -25,7 +25,7 @@ function LoginPage() {
   const handleSubmit = e => {
     try {
       e.preventDefault();
-      const data = dispatch(authOperations.logIn({ email, password }));
+      dispatch(authOperations.logIn({ email, password }));
       setEmail('');
       setPassword('');
     } catch (error) {
