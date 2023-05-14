@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
 export const List = styled.ul`
-  max-width: 420px;
+  width: 240px;
   padding: 0 10px;
+
+  @media (min-width: 480px) {
+    width: 320px;
+  }
 `;
 
 export const Item = styled.li`

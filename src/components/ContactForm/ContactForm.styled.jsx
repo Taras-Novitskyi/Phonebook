@@ -4,16 +4,22 @@ import styled from 'styled-components';
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  width: 280px;
+
+  width: 240px;
   padding: 20px;
   margin: 0 auto;
   font-size: 16px;
   border: 1px solid rgb(222, 222, 222);
+
+  @media (min-width: 480px) {
+    width: 280px;
+  }
 `;
 
 export const Input = styled.input`
   display: flex;
   width: 100%;
+
   margin-bottom: 8px;
   margin-top: 4px;
 `;
@@ -28,6 +34,7 @@ export const Button = styled.button`
   margin-left: auto;
   width: 120px;
   height: 28px;
+
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;

@@ -57,7 +57,7 @@ export const ContactItem = ({ id, name, number }) => {
         onClick={() => handleDelete(id)}
         variant="outlined"
         size="Normal"
-        sx={{ color: 'action.active', ml: 4 }}
+        sx={{ color: 'action.active'}}
       >
         <DeleteIcon />
       </IconButton>
