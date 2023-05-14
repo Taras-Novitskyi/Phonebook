@@ -1,91 +1,67 @@
-**Read in other languages: [Русский](README.md), [Polska](README.pl.md),
-[English](README.en.md), [Spanish](README.es.md).**
 
-# React homework template
+# Phonebook App
+This is a simple Phonebook application built using React with React Router for the frontend and Node.js for the backend. The app allows users to sign in, receive an authentication token, and perform various operations such as adding and deleting contacts. Users can also search for contacts based on their name. The application utilizes a mock API for data storage.
 
-Этот проект был создан при помощи
-[Create React App](https://github.com/facebook/create-react-app). Для знакомства
-и настройки дополнительных возможностей
-[обратись к документации](https://facebook.github.io/create-react-app/docs/getting-started).
+This project was created with [Create React App](https://github.com/facebook/create-react-app).
+To get acquainted and configure additional features
+[refer to documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-## Подготовка нового проекта
+## Features
 
-1. Убедись что на компьютере установлена LTS-версия Node.js.
-   [Скачай и установи](https://nodejs.org/en/) её если необходимо.
-2. Клонируй этот репозиторий.
-3. Измени имя папки с `react-homework-template` на имя своего проекта.
-4. Создай новый пустой репозиторий на GitHub.
-5. Открой проект в VSCode, запусти терминал и свяжи проект с GitHub-репозиторием
-   [по инструкции](https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#changing-a-remote-repositorys-url).
-6. Установи базовые зависимости проекта командой `npm install`.
-7. Запусти режим разработки, выполнив команду `npm start`.
-8. Перейди в браузере по адресу [http://localhost:3000](http://localhost:3000).
-   Эта страница будет автоматически перезагружаться после сохранения изменений в
-   файлах проекта.
+- User Authentication: Users can sign in to the app and receive an authentication token.
+- Add Contacts: Authenticated users can add new contacts to their phonebook.
+- Delete Contacts: Users can delete existing contacts from their phonebook.
+- Search Contacts: The app provides a search functionality to filter contacts by name.
+- Mock API: Data is stored and retrieved from a mock API.
+- Create routing using React Router.
+- The application should have the following routes. If the user enters a non-existent route, they should be redirected to the home page. '/' - Home component, the home page. 
 
-## Деплой
 
-Продакшн версия проекта будет автоматически проходить линтинг, собираться и
-деплоиться на GitHub Pages, в ветку `gh-pages`, каждый раз когда обновляется
-ветка `main`. Например, после прямого пуша или принятого пул-реквеста. Для этого
-необходимо в файле `package.json` отредактировать поле `homepage`, заменив
-`your_username` и `your_repo_name` на свои, и отправить изменения на GitHub.
 
-```json
-"homepage": "https://your_username.github.io/your_repo_name/"
+## Usage
+
+Upon launching the app, you will be directed to the sign-in page. If you don't have an account, you can create one by clicking on the "Sign Up" link.
+
+Once you are signed in, you will receive an authentication token. This token will be used for subsequent API calls to authenticate your requests.
+
+In the main dashboard, you can add new contacts by clicking on the add icon button. Fill in the required information such as name and phone number, and click button "Add contact" to add the contact to your phonebook.
+
+To delete a contact, locate the contact in the list and click on the delete icon button associated with that contact.
+
+To search for a specific contact, enter the name in the search bar, and the app will filter the contacts based on your input.
+
+
+## Installation
+
+To run the Phonebook app locally, follow these steps:
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
 ```
 
-Далее необходимо зайти в настройки GitHub-репозитория (`Settings` > `Pages`) и
-выставить раздачу продакшн версии файлов из папки `/root` ветки `gh-pages`, если
-это небыло сделано автоматически.
+Navigate to the project directory:
 
-![GitHub Pages settings](./assets/repo-settings.png)
+```bash
+cd Phonebook
+```
+Install the dependencies:
 
-### Статус деплоя
-
-Статус деплоя крайнего коммита отображается иконкой возле его идентификатора.
-
-- **Желтый цвет** - выполняется сборка и деплой проекта.
-- **Зеленый цвет** - деплой завершился успешно.
-- **Красный цвет** - во время линтинга, сборки или деплоя произошла ошибка.
-
-Более детальную информацию о статусе можно посмотреть кликнув по иконке, и в
-выпадающем окне перейти по ссылке `Details`.
-
-![Deployment status](./assets/status.png)
-
-### Живая страница
-
-Через какое-то время, обычно пару минут, живую страницу можно будет посмотреть
-по адресу указанному в отредактированном свойстве `homepage`. Например, вот
-ссылка на живую версию для этого репозитория
-[https://goitacademy.github.io/react-homework-template](https://goitacademy.github.io/react-homework-template).
-
-Если открывается пустая страница, убедись что во вкладке `Console` нет ошибок
-связанных с неправильными путями к CSS и JS файлам проекта (**404**). Скорее
-всего у тебя неправильное значение свойства `homepage` в файле `package.json`.
-
-### Маршрутизация
-
-Если приложение использует библиотеку `react-router-dom` для маршрутизации,
-необходимо дополнительно настроить компонент `<BrowserRouter>`, передав в пропе
-`basename` точное название твоего репозитория. Слеши в начале и конце строки
-обязательны.
-
-```jsx
-<BrowserRouter basename="/your_repo_name/">
-  <App />
-</BrowserRouter>
+```bash
+npm install
 ```
 
-## Как это работает
+Start the development server:
 
-![How it works](./assets/how-it-works.png)
+```bash
+npm start
+```
 
-1. После каждого пуша в ветку `main` GitHub-репозитория, запускается специальный
-   скрипт (GitHub Action) из файла `.github/workflows/deploy.yml`.
-2. Все файлы репозитория копируются на сервер, где проект инициализируется и
-   проходит линтинг и сборку перед деплоем.
-3. Если все шаги прошли успешно, собранная продакшн версия файлов проекта
-   отправляется в ветку `gh-pages`. В противном случае, в логе выполнения
-   скрипта будет указано в чем проблема.
+Go to [http://localhost:3000](http://localhost:3000) in your browser.
+This page will automatically reload after saving changes to the project files.
+
+## Demo
+
+https://taras-novitskyi.github.io/Phonebook/
+
