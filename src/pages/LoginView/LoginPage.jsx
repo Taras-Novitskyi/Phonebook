@@ -44,6 +44,7 @@ function LoginPage() {
             type="email"
             name="email"
             value={email}
+            required
             onChange={handleChange}
           />
         </InputLabel>
@@ -55,6 +56,7 @@ function LoginPage() {
             name="password"
             value={password}
             onChange={handleChange}
+            required
           />
         </InputLabel>
 

@@ -33,7 +33,7 @@ export function RegisterPage() {
       setEmail('');
       setPassword('');
     } catch (error) {
-      toast.error(`Something wrong, try again. Error ${error.message}`);
+      toast.error(`Something wrong, try again.`);
     }
   };
 
@@ -44,7 +44,13 @@ export function RegisterPage() {
       <Form onSubmit={handleSubmit} autoComplete="off">
         <InputLabel sx={{ display: 'flex', flexDirection: 'column', mb: 4 }}>
           Name
-          <Input type="text" name="name" value={name} onChange={handleChange} />
+          <Input
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+            required
+          />
         </InputLabel>
 
         <InputLabel sx={{ display: 'flex', flexDirection: 'column', mb: 4 }}>
@@ -54,6 +60,7 @@ export function RegisterPage() {
             name="email"
             value={email}
             onChange={handleChange}
+            required
           />
         </InputLabel>
 
@@ -64,6 +71,7 @@ export function RegisterPage() {
             name="password"
             value={password}
             onChange={handleChange}
+            required
           />
         </InputLabel>
 

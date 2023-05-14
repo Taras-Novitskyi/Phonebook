@@ -9,6 +9,7 @@ import { Filter } from 'components/Fillter/Fillter';
 import { Loader } from 'components/Loader/Loader';
 import { fetchContacts } from 'redux/operation';
 import { selectError, selectIsLoading, selectContacts } from 'redux/selectors';
+import { Container } from "./ContactsPage.styled";
 
 const ContactsView = () => {
   const [addContact, setAddContact] = useState(false);
@@ -24,7 +25,6 @@ const ContactsView = () => {
 
   const handleAddContact = () => {
     setAddContact(true);
-    // setAddContact(addContact => !addContact);
   };
 
   const closeForm = () => {
@@ -32,8 +32,8 @@ const ContactsView = () => {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Box sx={{ width: '50%' }}>
+    <Container>
+      <Box >
         {contacts.length > 0 ? (
           <Section title="Your contacts">
             {!isLoading && !error && <Filter />}
@@ -52,7 +52,6 @@ const ContactsView = () => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'start',
-            width: '50%',
           }}
         >
           {!addContact && (
@@ -85,7 +84,7 @@ const ContactsView = () => {
           )}
         </Box>
       }
-    </Box>
+    </Container>
   );
 };
 

@@ -31,7 +31,7 @@ export  function UserMenu() {
           marginRight: 1,
         }}
       >
-        Weclome, {name}
+        {name}
       </Box>
       <IconButton
         type="button"
