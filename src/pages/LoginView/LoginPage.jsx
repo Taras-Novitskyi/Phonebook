@@ -1,15 +1,27 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { Button, InputLabel, Input } from '@mui/material';
+import {
+  Button,
+  InputLabel,
+  Input,
+  InputAdornment,
+  IconButton,
+} from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 import { authOperations } from '../../redux/auth';
-import { Form } from './LoginPage.styled';
+import { Form, Container } from './LoginPage.styled';
 
 function LoginPage() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -34,7 +46,7 @@ function LoginPage() {
   };
 
   return (
-    <div>
+    <Container>
       <h1>Login</h1>
 
       <Form onSubmit={handleSubmit} autoComplete="off">
@@ -52,11 +64,18 @@ function LoginPage() {
         <InputLabel sx={{ display: 'flex', flexDirection: 'column', mb: 4 }}>
           Password
           <Input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             name="password"
             value={password}
             onChange={handleChange}
             required
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton onClick={handleClickShowPassword}>
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
           />
         </InputLabel>
 
@@ -64,7 +83,7 @@ function LoginPage() {
           Login
         </Button>
       </Form>
-    </div>
+    </Container>
   );
 }
 
